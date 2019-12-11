@@ -33,10 +33,10 @@
     "eslint": "^5.16.0",
     "eslint-loader": "^2.2.1",
     "later": "^1.2.0",
-    "uglifyjs-webpack-plugin": "^1.2.7",
+    "terser-webpack-plugin": "^2.2.3",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
-    "yargs": "^10.0.3"
+    "yargs": "^15.0.2"
   },
   "nyc": {
     "sourceMap": false,
