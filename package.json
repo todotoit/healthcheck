@@ -4,10 +4,8 @@
   "description": "Setup periodic http pings to an endpoint and application error reporting",
   "main": "lib/healthcheck.js",
   "scripts": {
-    "lint": "eslint --fix src/*",
     "build": "webpack --env dev && webpack --env build",
     "dev": "webpack --progress --colors --watch --env dev",
-    "repl": "node -i -e \"$(< ./lib/healthcheck.js)\""
   },
   "repository": {
     "type": "git",
