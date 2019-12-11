@@ -30,7 +30,7 @@ export default class HealthCheck {
    * Calls the fail endpoint to report an error
    */
   error() {
-    const isAbsolute = this.options.fail.indexOf('http') > -1;
+    const isAbsolute = this.options.fail.indexOf('://') > -1;
     const url = isAbsolute ? this.options.fail : this.options.url + this.options.fail;
 
     this.request(url);
