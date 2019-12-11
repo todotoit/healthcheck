@@ -1,6 +1,6 @@
 {
   "name": "healthcheck",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "Produce universal library with webpack and es6",
   "main": "lib/healthcheck.js",
   "scripts": {
