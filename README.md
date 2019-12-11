@@ -1,6 +1,6 @@
-# Healthcheck
+# HealthCheck
 
-Simple utility class to setup periodic http pings to an endpoint.
+Simple utility class to setup periodic http pings to an endpoint. Used to monitor an app status and report errors.
 
 ## Install
 
@@ -16,6 +16,20 @@ const hc = new HealthCheck({options})
 
 hc.start()  // starts a timer - called by default when calling new HealthCheck() without autorun: false;
 hc.stop()   // stops a running timer
+hc.error()  // sends an http request to the configured fail endpoint
+```
+
+## Error reporting
+
+```javascript
+import HealthCheck from '@todotoit/healthcheck'
+const hc = new HealthCheck()
+
+doSomething()
+  .then(...)
+  .catch(e => {
+    hc.error()
+  })
 ```
 
 ## Options
@@ -25,6 +39,8 @@ hc.stop()   // stops a running timer
   url: '...',        // the url for the http request
   interval: 3600,    // default: pings every hour - can be a later time string eg. "every 6 hours"
   autorun: true,    // by default, the timer starts when the class is instantiated, you can set this to false to start it programmatically using hc.start()
+  method: 'GET'     // request method
+  fail: '/fail'     // alternative url to call when reporting errors - absolute if it starts with 'https://', appended to the default url if not
   callback: false   // a callback to be called each time the healthcheck runs - it receives the response text as an argument
 }
 ```

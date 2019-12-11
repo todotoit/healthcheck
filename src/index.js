@@ -2,7 +2,9 @@ const later = require('later/later.js');
 const defaults = {
   interval: 3600,
   autorun: true,
-  callback: false
+  callback: false,
+  method: 'GET',
+  fail: '/fail'
 };
 
 export default class HealthCheck {
@@ -21,15 +23,17 @@ export default class HealthCheck {
   }
 
   check() {
-    const request = new XMLHttpRequest();
+    this.request(this.options.url, this.options.callback);
+  }
 
-    request.onreadystatechange = function () {
-      if (request.readyState === 4 && request.status === 200) {
-        if (this.options.callback) this.callback(request.responseText);
-      }
-    };
-    request.open('GET', this.options.url, true);
-    request.send(null);
+  /**
+   * Calls the fail endpoint to report an error
+   */
+  error() {
+    const isAbsolute = this.options.fail.indexOf('http') > -1;
+    const url = isAbsolute ? this.options.fail : this.options.url + this.options.fail;
+
+    this.request(url);
   }
 
   /**
@@ -51,5 +55,17 @@ export default class HealthCheck {
       t = later.parse.recur().every(this.options.interval).second();
     }
     this.timer = later.setInterval(() => this.check(), t);
+  }
+
+  request(url, callback) {
+    const request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+      if (request.readyState === 4 && request.status === 200) {
+        if (callback) this.callback(request.responseText);
+      }
+    };
+    request.open('GET', url, true);
+    request.send(null);
   }
 }
