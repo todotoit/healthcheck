@@ -1,4 +1,5 @@
-const later = require('later/later.js');
+import later from 'no-cov-later';
+
 const defaults = {
   interval: 3600,
   autorun: true,

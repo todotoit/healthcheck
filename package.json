@@ -5,7 +5,7 @@
   "main": "lib/healthcheck.js",
   "scripts": {
     "build": "webpack --env dev && webpack --env build",
-    "dev": "webpack --progress --colors --watch --env dev",
+    "dev": "webpack --progress --colors --watch --env dev"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,6 @@
     "yargs": "^15.0.2"
   },
   "dependencies": {
-    "later": "^1.2.0"
+    "no-cov-later": "^1.2.0"
   }
 }

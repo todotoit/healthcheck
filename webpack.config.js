@@ -1,10 +1,11 @@
 /* global __dirname, require, module*/
 
+const webpack = require('webpack');
 const path = require('path');
 const env = require('yargs').argv.env; // use --env with webpack 2
 const pkg = require('./package.json');
 
-let libraryName = pkg.name;
+let libraryName = pkg.name.split('/').pop();
 
 let outputFile, mode;
 
@@ -47,10 +48,10 @@ const config = {
     extensions: ['.json', '.js']
   },
   externals: {
-    'later/later.js': {
-      commonjs: 'later',
-      commonjs2: 'later',
-      amd: 'later',
+    'no-cov-later': {
+      commonjs: 'no-cov-later',
+      commonjs2: 'no-cov-later',
+      amd: 'no-cov-later',
       root: 'later'
     }
   }
