@@ -5,7 +5,7 @@ Simple utility class to setup periodic http pings to an endpoint. Used to monito
 ## Install
 
 ```
-npm install --save @todotoit/healthcheck
+npm install @todotoit/healthcheck
 ```
 
 ## Usage
@@ -38,7 +38,6 @@ doSomething()
   url: '...',         // the url for the http request
   interval: 3600,     // default: pings every hour - can be a later time string eg. "every 6 hours"
   autorun: true,      // by default, the timer starts when the class is instantiated, you can set this to false to start it programmatically using hc.start()
-  method: 'GET'       // request method
   fail: '/fail'       // alternative url to call when reporting errors - absolute if it starts with 'https://', appended to the default url if not
   callback: false     // a callback to be called each time the healthcheck runs - it receives the response text as an argument
 }
@@ -47,7 +46,7 @@ doSomething()
 ## Development
 
 1. Build the library
-  * Run `yarn install` (recommended) or `npm install` to get the project's dependencies
-  * Run `yarn build` or `npm run build` to produce minified version of the library.
+  * Run `npm install` to get the project's dependencies
+  * Run `npm run build` to produce minified version of the library.
 2. Development mode
-  * Having all the dependencies installed run `yarn dev` or `npm run dev`. This command will generate an non-minified version of the library and will run a watcher so you get the compilation on file change.
+  * Having all the dependencies installed run `npm run dev`. This command will generate an non-minified version of the library and will run a watcher so you get the compilation on file change.
