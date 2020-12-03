@@ -8,6 +8,34 @@ const defaults = {
   fail: '/fail'
 };
 
+function nodeRequest(url, callback) {
+  let agent;
+
+  if (url.includes('https://')) {
+    agent = require('https');
+  } else {
+    agent = require('http');
+  }
+  agent.request(url, (response) => {
+    if (response.statusCode !== 200) return;
+    response.on('end', () => {
+      if (callback) callback();
+    });
+  });
+}
+
+function browserRequest(url, callback) {
+  const request = new XMLHttpRequest();
+
+  request.onreadystatechange = function () {
+    if (request.readyState === 4 && request.status === 200) {
+      if (callback) callback(request.responseText);
+    }
+  };
+  request.open('GET', url, true);
+  request.send(null);
+}
+
 export default class HealthCheck {
   /**
    *
@@ -59,14 +87,10 @@ export default class HealthCheck {
   }
 
   request(url, callback) {
-    const request = new XMLHttpRequest();
-
-    request.onreadystatechange = function () {
-      if (request.readyState === 4 && request.status === 200) {
-        if (callback) this.callback(request.responseText);
-      }
-    };
-    request.open('GET', url, true);
-    request.send(null);
+    if (typeof window === 'undefined') {
+      nodeRequest(url, callback);
+    } else {
+      browserRequest(url, callback);
+    }
   }
 }
