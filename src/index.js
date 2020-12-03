@@ -83,6 +83,7 @@ export default class HealthCheck {
     } else {
       t = later.parse.recur().every(this.options.interval).second();
     }
+    this.check();
     this.timer = later.setInterval(() => this.check(), t);
   }
 
