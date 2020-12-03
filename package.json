@@ -1,6 +1,6 @@
 {
   "name": "@todotoit/healthcheck",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "Setup periodic http pings to an endpoint and application error reporting",
   "main": "lib/healthcheck.js",
   "scripts": {
